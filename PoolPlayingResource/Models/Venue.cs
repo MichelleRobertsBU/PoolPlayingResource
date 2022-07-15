@@ -2,16 +2,14 @@
 
 namespace PoolPlayingResource.Models
 {
-    public class Venue
-
+        
+    public partial class Venue
     {
-        public int Id { get; set; }
-        public string? Title { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
-        public string? Genre { get; set; }
-        public decimal Price { get; set; }
+        public int VenueId { get; set; }
+        public string VenueName { get; set; }
+        public Nullable<int> NumberTables { get; set; }
+        public string VenueAddress { get; set; }
+        public string TableFee { get; set; }
+        public Nullable<int> TableSize { get; set; }
     }
 }
-
