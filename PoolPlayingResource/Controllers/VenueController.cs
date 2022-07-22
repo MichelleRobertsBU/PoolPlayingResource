@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PoolPlayingResource.Models;
 using PoolPlayingResource.data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PoolPlayingResource.Controllers
 {
@@ -46,6 +42,7 @@ namespace PoolPlayingResource.Controllers
         }
 
         // GET: Venue/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -159,5 +156,22 @@ namespace PoolPlayingResource.Controllers
         {
           return (_context.Venues?.Any(e => e.VenueId == id)).GetValueOrDefault();
         }
+        //GET: Venue/AddYourVenue
+        public IActionResult AddYourVenue()
+        {
+            return View();
+        }
+        /*public async Task<IActionResult> Index(string searchString)
+        {
+            var venues = from v in _context.Venues
+                         select v;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                venues = (from v in _context.Venues
+                          select v).Where(s => s.VenueName!.Contains(searchString));
+            }
+            return View(await (from v in _context.Venues
+                               select v).ToListAsync());
+        }*/
     }
 }
