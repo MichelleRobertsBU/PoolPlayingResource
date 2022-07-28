@@ -43,7 +43,6 @@ namespace PoolPlayingResource.Controllers
         }
 
         // GET: Venue/Create
-        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -64,6 +63,7 @@ namespace PoolPlayingResource.Controllers
             }
             return View(venue);
         }
+
 
         // GET: Venue/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -158,11 +158,11 @@ namespace PoolPlayingResource.Controllers
           return (_context.Venues?.Any(e => e.VenueId == id)).GetValueOrDefault();
         }
         //GET: Venue/AddYourVenue
-        /*public IActionResult AddYourVenue()
+        public IActionResult AddYourVenue()
         {
             return View();
         }
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> VenueIndex(string searchString)
         {
             var venues = from v in _context.Venues
                          select v;
@@ -173,7 +173,7 @@ namespace PoolPlayingResource.Controllers
             }
             return View(await (from v in _context.Venues
                                select v).ToListAsync());
-        }*/
+        }
 
         private string GetDebuggerDisplay()
         {
