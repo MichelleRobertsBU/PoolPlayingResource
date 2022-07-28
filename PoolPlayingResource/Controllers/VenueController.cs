@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PoolPlayingResource.Models;
 using PoolPlayingResource.data;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics;
 
 namespace PoolPlayingResource.Controllers
 {
@@ -18,9 +19,9 @@ namespace PoolPlayingResource.Controllers
         // GET: Venue
         public async Task<IActionResult> Index()
         {
-              return _context.Venues != null ? 
-                          View(await _context.Venues.ToListAsync()) :
-                          Problem("Entity set 'Context.Venues'  is null.");
+            return _context.Venues != null ?
+                        View(await _context.Venues.ToListAsync()) :
+                        Problem("Entity set 'Context.Venues'  is null.");
         }
 
         // GET: Venue/Details/5
@@ -157,11 +158,11 @@ namespace PoolPlayingResource.Controllers
           return (_context.Venues?.Any(e => e.VenueId == id)).GetValueOrDefault();
         }
         //GET: Venue/AddYourVenue
-        public IActionResult AddYourVenue()
+        /*public IActionResult AddYourVenue()
         {
             return View();
         }
-        /*public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString)
         {
             var venues = from v in _context.Venues
                          select v;
@@ -173,5 +174,10 @@ namespace PoolPlayingResource.Controllers
             return View(await (from v in _context.Venues
                                select v).ToListAsync());
         }*/
+
+        private string GetDebuggerDisplay()
+        {
+            return ToString();
+        }
     }
 }
