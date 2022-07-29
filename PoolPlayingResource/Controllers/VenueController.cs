@@ -162,17 +162,17 @@ namespace PoolPlayingResource.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> VenueIndex(string searchString)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddYourVenue([Bind("VenueId,VenueName,NumberTables,VenueAddress,TableFee,TableSize")] Venue venue)
         {
-            var venues = from v in _context.Venues
-                         select v;
-            if (!String.IsNullOrEmpty(searchString))
+            if (ModelState.IsValid)
             {
-                venues = (from v in _context.Venues
-                          select v).Where(s => s.VenueName!.Contains(searchString));
+                _context.Add(venue);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(await (from v in _context.Venues
-                               select v).ToListAsync());
+            return View(venue);
         }
 
         private string GetDebuggerDisplay()
